@@ -1,13 +1,13 @@
-.Home{
-    height: 1000px;
-    width: 100%;
-    background-color: rgb(68, 68, 104);
-}
-button{
+.botao{
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
     width: 200px;
     height: 40px;
     border:none;
-    border:1px solid rgba(54, 49, 49, 0.733);
+    border:1px solid rgba(54, 49, 49, 0.73);
+    margin-bottom: 10px;
     color:black;
     background: unset;
     outline:none;
