@@ -3,15 +3,46 @@ import Input from './Input';
 import Botao from './Botao';
 
 const Cadastro = () => {
-    const[nome,setNome] = useState("");
-    const[email,setEmail] = useState("");
-    const[confirmEmail,setConfirmEmail] = useState("");
-    const[senha,setSenha] = useState("");
-    const [aumentar,setAumentar] = useState(1)
+    const [nome, setNome] = useState("");
+    const [email, setEmail] = useState("");
+    const [confirmEmail, setConfirmEmail] = useState("");
+    const [senha, setSenha] = useState("");
+    const [aumentar, setAumentar] = useState(1);
+    const [count, setCount] = useState(1);
+    const [mensagem,setMensagem]= useState("");
+    const [status, setStatus] = useState();
 
+
+    const resposta = texto => {
+        setMensagem(texto);
+        setTimeout(() => {
+          setMensagem("")
+        }, 1500);
+      }
     const handleSubmit = e =>{
         e.preventDefault();
-    };
+        if(email === confirmEmail){
+            const payload = {
+                name: nome,
+                email:email,
+                confirm_email:confirmEmail,
+                password:senha,
+            }
+            localStorage.setItem(`Dados${count}`,JSON.stringify(payload));
+            setCount(count + 1);
+    
+            setNome("");
+            setEmail("");
+            setConfirmEmail("");
+            setSenha("");
+            resposta("Cadastrado com sucesso")
+            setStatus(true)
+         }else {
+            resposta("Os emails não correspondem");
+            setStatus(false);
+         }    
+    }
+       
     useEffect(()=>{
         fetch(`https://rickandmortyapi.com/api/character/${aumentar}`,{
             method:"GET"
@@ -29,7 +60,10 @@ const Cadastro = () => {
 
     return (
      <div className="Cadastro">
+       
+
          <h1>Cadastre-se aqui</h1>
+         <p>{mensagem}</p>
          <form onSubmit={handleSubmit}>
          <Input  value={nome}
             type="text"
@@ -58,8 +92,8 @@ const Cadastro = () => {
              placeholder="Digite sua senha"
              atualizarState={setSenha}/>
              <Botao />
-             <button onClick ={incrementar}>Adicionar</button>
          </form>
+         <button onClick ={incrementar}>Adicionar</button>
      </div>
     )
   }

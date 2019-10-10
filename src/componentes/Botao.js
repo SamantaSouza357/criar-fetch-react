@@ -2,7 +2,7 @@ import React from 'react';
 import './Botao.scss';
 
 
-const Botao = ({botao}) => {
+const Botao = () => {
     return (
         <button className="botao">Cadastrar</button>
     
