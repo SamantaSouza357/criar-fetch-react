@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Input from './Input';
 import Botao from './Botao';
 
@@ -9,8 +9,7 @@ const Cadastro = () => {
     const [senha, setSenha] = useState("");
     const [aumentar, setAumentar] = useState(1);
     const [count, setCount] = useState(1);
-    const [mensagem,setMensagem]= useState("");
-    const [status, setStatus] = useState();
+    const [mensagem, setMensagem]= useState("");
 
 
     const resposta = texto => {
@@ -24,22 +23,20 @@ const Cadastro = () => {
         if(email === confirmEmail){
             const payload = {
                 name: nome,
-                email:email,
-                confirm_email:confirmEmail,
-                password:senha,
+                email: email,
+                confirm_email: confirmEmail,
+                password: senha
             }
-            localStorage.setItem(`Dados${count}`,JSON.stringify(payload));
-            setCount(count + 1);
+        window.localStorage.setItem(`Dados${count}`,JSON.stringify(payload));
+        setCount(count + 1);
     
-            setNome("");
-            setEmail("");
-            setConfirmEmail("");
-            setSenha("");
-            resposta("Cadastrado com sucesso")
-            setStatus(true)
-         }else {
+        setNome("");
+        setEmail("");
+        setConfirmEmail("");
+        setSenha("");
+        resposta("Cadastrado com sucesso");
+        }else {
             resposta("Os emails não correspondem");
-            setStatus(false);
          }    
     }
        
